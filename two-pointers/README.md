@@ -1,6 +1,6 @@
 # Two Pointers Technique
 **The Two Pointers** technique is a powerful and versatile approach used to solve various algorithmic problems,
-particularly in __arrays and strings__.
+particularly in **arrays and strings**.
 The idea behind two pointers is to use two indices (or pointers) to traverse through a data structure simultaneously,
 often reducing the need for nested loops and optimizing the time complexity of the problem.
 
@@ -26,13 +26,13 @@ Depending on the problem, the two pointers can either:
     and adjust the pointers based on whether the condition is met.
 
 ## When to Use the Two-Pointer Technique
-1.  Sorted Data:
+1.  **Sorted Data**:
     If the problem involves a sorted array or string,
     the two-pointer technique is often the best approach,
     especially for finding pairs or subarrays that meet specific conditions.
-2.  Looking for Pairs or Triplets:
+2.  **Looking for Pairs or Triplets**:
     If the problem involves finding two or three elements in an array that satisfy
     a condition (like spesific sum), two pointers can reduce the need for nested loops
-3.  Link List Problems:
+3.  *Link List Problems*:
     When working with linked lists, two pointers can be used to detect cycles or
     find the middle of the list efficiently.

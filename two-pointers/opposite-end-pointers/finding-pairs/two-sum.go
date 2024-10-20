@@ -64,8 +64,8 @@ func twoSumTwoPointers(nums []int, target int) []int {
 }
 
 func twoSumBruteForce(nums []int, target int) []int {
-	for i := 0; i < len(nums); i++ {
-		for j := i + 1; j < len(nums); j++ {
+	for i := 0; i < len(nums)-1; i++ {
+		for j := i + 1; j < len(nums)-1; j++ {
 			if nums[i]+nums[j] == target {
 				return []int{i, j}
 			}
