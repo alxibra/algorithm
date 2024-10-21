@@ -8,7 +8,7 @@ import (
 func main() {
 	// Example input
 	nums := []int{1, 3, 5, 7, 10}
-	target := 7
+	target := 9
 	// result := bruteForce(nums, target)
 	result := binarySearch(nums, target)
 	fmt.Println("Indices: ", result)
@@ -40,17 +40,19 @@ func binarySearchClosest(nums []int, left, right int, target int) int {
 	closest := -1
 	for left <= right {
 		mid := left + (right-left)/2
+		fmt.Println("left: ", left, ", right: ", right, ", mid: ", mid)
 		if closest == -1 || abs(nums[mid]) < abs(nums[closest]) {
 			closest = mid
 		}
-
-		if nums[mid] < target {
+		if target > nums[mid] {
+			fmt.Println("change left")
 			left = mid + 1
 			continue
 		}
-
+		fmt.Println("change right")
 		right = mid - 1
 	}
+	fmt.Println("...")
 	return closest
 }
 
