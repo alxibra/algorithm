@@ -10,19 +10,43 @@ func main() {
 	nums := []int{1, 3, 5, 7, 10}
 	target := 9
 	// result := bruteForce(nums, target)
-	result := binarySearch(nums, target)
+	result := hashMap(nums, target)
 	fmt.Println("Indices: ", result)
-	fmt.Printf("elements: %d, %d\n", nums[result[0]], nums[result[1]])
+	// fmt.Printf("elements: %d, %d\n", nums[result[0]], nums[result[1]])
+}
+
+func hashMap(nums []int, target int) []int {
+	if len(nums) < 2 {
+		return []int{}
+	}
+	hash := make(map[int]int)
+	closestSum := math.MaxInt32
+	closestIndices := []int{-1, -1}
+	// iterate through nums
+	for i := 0; i < len(nums); i++ {
+		hash[nums[i]] = i
+		for k, v := range hash {
+			currentSum := nums[i] + k
+			if abs(target-currentSum) < abs(target-closestSum) {
+				closestSum = currentSum
+				closestIndices = []int{i, v}
+			}
+		}
+	}
+	return closestIndices
 }
 
 func binarySearch(nums []int, target int) []int {
 	n := len(nums)
 	closestSum := math.MaxInt32
 	closestIndices := []int{-1, -1}
+	fmt.Println("nums: ", nums)
+	fmt.Println("target: ", target)
 
 	// n-1 not till last element
 	for i := 0; i < n-1; i++ {
 		complement := target - nums[i]
+		fmt.Println("complement: ", complement)
 		j := binarySearchClosest(nums, i+1, n-1, complement)
 		if j != -1 {
 			currentSum := nums[i] + nums[j]
