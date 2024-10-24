@@ -24,14 +24,14 @@ func hashMap(nums []int, target int) []int {
 	closestIndices := []int{-1, -1}
 	// iterate through nums
 	for i := 0; i < len(nums); i++ {
-		hash[nums[i]] = i
-		for k, v := range hash {
-			currentSum := nums[i] + k
+		for num, index := range hash {
+			currentSum := nums[i] + num
 			if abs(target-currentSum) < abs(target-closestSum) {
 				closestSum = currentSum
-				closestIndices = []int{i, v}
+				closestIndices = []int{i, index}
 			}
 		}
+		hash[nums[i]] = i
 	}
 	return closestIndices
 }
