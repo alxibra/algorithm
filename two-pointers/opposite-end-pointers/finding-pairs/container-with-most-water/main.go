@@ -26,3 +26,21 @@ func bruteForce(height []int) int {
 	}
 	return maxCapacity
 }
+
+func twoPointers(height []int) int {
+	left, right := 0, len(height)-1
+	maxCapacity := math.MinInt32
+	for left < right {
+		currentCapacity := math.Min(float64(height[left]), float64(height[right])) * float64(right-left)
+		if currentCapacity > float64(maxCapacity) {
+			maxCapacity = int(currentCapacity)
+		}
+
+		if height[left] < height[right] {
+			left++
+			continue
+		}
+		right--
+	}
+	return maxCapacity
+}
