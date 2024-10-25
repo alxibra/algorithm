@@ -7,12 +7,38 @@ import (
 
 func main() {
 	// Example input
-	nums := []int{1, 3, 5, 7, 10}
+	nums := []int{1, 2, 3, 5, 7, 10}
 	target := 9
 	// result := bruteForce(nums, target)
-	result := hashMap(nums, target)
+	// result := hashMap(nums, target)
+	result := twoPointer(nums, target)
 	fmt.Println("Indices: ", result)
 	// fmt.Printf("elements: %d, %d\n", nums[result[0]], nums[result[1]])
+}
+
+func twoPointer(nums []int, target int) []int {
+	left := 0
+	right := len(nums) - 1
+	closestSum := math.MaxInt32
+	closestIndices := []int{-1, -1}
+	for left < right {
+		fmt.Println("left: ", left, " right: ", right)
+		currentSum := nums[left] + nums[right]
+		if abs(target-currentSum) < abs(target-closestSum) {
+			closestSum = currentSum
+			closestIndices = []int{left, right}
+		}
+		if currentSum < target {
+			left++
+			continue
+		}
+		if currentSum > target {
+			right--
+			continue
+		}
+		return []int{left, right}
+	}
+	return closestIndices
 }
 
 func hashMap(nums []int, target int) []int {
