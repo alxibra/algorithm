@@ -8,7 +8,20 @@ For example, if the input is "hello", the output should be "olleh".
 */
 
 func main() {
-	bruteForce("hello")
+	// bruteForce("olleh")
+	twoPointer("olleh")
+}
+
+func twoPointer(word string) {
+	left, right := 0, len(word)-1
+	reserved := make([]byte, len(word))
+
+	for left <= right {
+		reserved[right], reserved[left] = word[left], word[right]
+		left++
+		right--
+	}
+	fmt.Println(string(reserved))
 }
 
 func bruteForce(word string) {
