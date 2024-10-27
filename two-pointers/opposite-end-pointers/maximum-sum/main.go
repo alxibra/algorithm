@@ -4,6 +4,7 @@ import (
 	"container/heap"
 	"fmt"
 	"math"
+	"sort"
 )
 
 func main() {
@@ -12,6 +13,14 @@ func main() {
 	singlePass(nums)
 	twoPass(nums)
 	Heap(nums)
+	twoPointer(nums)
+}
+
+func twoPointer(nums []int) {
+	sort.Ints(nums)
+	n := len(nums)
+	sum := nums[n-1] + nums[n-2]
+	fmt.Println("max: ", sum)
 }
 
 func twoPass(nums []int) {
@@ -61,7 +70,8 @@ func Heap(nums []int) {
 			heap.Push(h, nums[i])
 		}
 	}
-	fmt.Println("heap: ", h)
+	sum := (*h)[0] + (*h)[1]
+	fmt.Println("max: ", sum)
 }
 
 func singlePass(nums []int) {
@@ -92,5 +102,5 @@ func bruteForce(nums []int) {
 			}
 		}
 	}
-	fmt.Println("max sum: ", maxSum)
+	fmt.Println("max: ", maxSum)
 }
