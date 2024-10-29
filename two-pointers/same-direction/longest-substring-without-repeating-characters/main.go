@@ -36,38 +36,24 @@ func bruteForce(s string) int {
 
 // Two Pointers with Frequency Array solution
 func twoPointer(s string) int {
-	n := len(s)
-	if n == 0 {
-		return 0 // Edge case: Empty string
-	}
+	max, p2 := 0, 0
+	frq := [128]int{}
 
-	// Create a frequency array to track occurrences of characters
-	freq := [128]int{} // Assuming standard ASCII character set
+	for p1 := 0; p1 < len(s); p1++ {
+		chr := s[p1]
+		frq[chr]++
 
-	// Initialize two pointers and max length
-	left, maxLength := 0, 0
-
-	// Iterate with the right pointer
-	for right := 0; right < n; right++ {
-		char := s[right]
-
-		// Increment the frequency of the current character
-		freq[char]++
-
-		// If the current character is repeated, shrink the window from the left
-		for freq[char] > 1 {
-			freq[s[left]]-- // Decrement the frequency of the character at the left pointer
-			left++          // Move the left pointer to the right
+		for frq[chr] > 1 {
+			frq[s[p2]]--
+			p2++
 		}
 
-		// Update max length if the current window is longer
-		currentLength := right - left + 1
-		if currentLength > maxLength {
-			maxLength = currentLength
+		lng := p1 - p2 + 1
+		if lng > max {
+			max = lng
 		}
 	}
-
-	return maxLength
+	return max
 }
 
 func isUniq(s string, i, k int) bool {
