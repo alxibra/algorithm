@@ -13,7 +13,7 @@ func main() {
 	// s3 := "pwwkew"
 	// fmt.Println("longest: ", bruteForce(s3))
 	s := "aabbca"
-	fmt.Println("longest: ", twoPointerWithHashmap(s))
+	fmt.Println("longest: ", asciiArray(s))
 	// s2 := "bbbbb"
 	// fmt.Println("longest: ", twoPointer(s2))
 	// s3 := "pwwkew"
@@ -51,6 +51,30 @@ func twoPointer(s string) int {
 		lng := p1 - p2 + 1
 		if lng > max {
 			max = lng
+		}
+	}
+	return max
+}
+
+func asciiArray(s string) int {
+	max, left := 0, 0
+
+	lastSeen := make([]int, 128)
+	for i := 0; i < 128; i++ {
+		lastSeen[i] = -1
+	}
+
+	for right := 0; right < len(s); right++ {
+		char := s[right]
+
+		if lastSeen[char] >= left {
+			left = lastSeen[char] + 1
+		}
+		lastSeen[char] = right
+
+		length := right - left + 1
+		if length > max {
+			max = length
 		}
 	}
 	return max
