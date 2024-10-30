@@ -67,9 +67,9 @@ func twoPointerWithHashmap(s string) int {
 			left++
 		}
 		set[char] = true
-		lngth := right - left + 1
-		if max < lngth {
-			max = lngth
+		length := right - left + 1
+		if length > max {
+			max = length
 		}
 	}
 	return max
