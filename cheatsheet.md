@@ -1,3 +1,5 @@
+# CHEATSHEET
+## Heap
 ```go
 type MinHeap []int
 
@@ -16,7 +18,7 @@ func (h *MinHeap) Pop() interface{} {
 }
 ```
 
-** prefix Sum **
+## prefix Sum
 
 ```go
 func prefixSum(nums []int) []int {
