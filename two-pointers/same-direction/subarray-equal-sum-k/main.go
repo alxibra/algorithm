@@ -11,10 +11,10 @@ func main() {
 
 func bruteForce(nums []int, k int) int {
 	count := 0
-	for i := 0; i < len(nums); i++ {
+	for start := 0; start < len(nums); start++ {
 		sum := 0
-		for l := i; l < len(nums); l++ {
-			sum += nums[l]
+		for end := start; end < len(nums); end++ {
+			sum += nums[end]
 			if sum == k {
 				count++
 			}
@@ -26,10 +26,9 @@ func bruteForce(nums []int, k int) int {
 func bruteForcePrefixSum(nums []int, k int) int {
 	n := len(nums)
 	count := 0
-
 	prefix := make([]int, n)
 	prefix[0] = nums[0]
-	for i := 1; i < len(nums); i++ {
+	for i := 1; i < n; i++ {
 		prefix[i] = prefix[i-1] + nums[i]
 	}
 
@@ -39,12 +38,11 @@ func bruteForcePrefixSum(nums []int, k int) int {
 			if start > 0 {
 				sum -= prefix[start-1]
 			}
-			// Check if the sum of this subarray is equal to k
+
 			if sum == k {
 				count++
 			}
 		}
-		fmt.Println("-----")
 	}
 	return count
 }

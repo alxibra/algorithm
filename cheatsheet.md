@@ -15,3 +15,31 @@ func (h *MinHeap) Pop() interface{} {
 	return x
 }
 ```
+
+** prefix Sum **
+
+```go
+func prefixSum(nums []int) []int {
+    n := len(nums)
+    prefix := make([]int, n)
+    prefix[0] = nums[0]
+    for i := 1; i < n; i++ {
+        prefix[i] = prefix[i-1] + nums[i]
+    }
+    return prefix
+}
+
+func subarraySum(prefix []int, i, j int) int {
+    if i == 0 {
+        return prefix[j]
+    }
+    return prefix[j] - prefix[i-1]
+}
+
+func main() {
+    nums := []int{1, 2, 3, 4}
+    prefix := prefixSum(nums)
+    fmt.Println("Sum of subarray nums[1:3]:", subarraySum(prefix, 1, 3)) // Output: 9 (2 + 3 + 4)
+}
+```
+Output: For nums = [1, 2, 3, 4], the prefix sum array would be [1, 3, 6, 10].
