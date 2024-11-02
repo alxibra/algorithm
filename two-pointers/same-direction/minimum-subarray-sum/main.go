@@ -6,28 +6,22 @@ import (
 )
 
 func minSubArrayLen(target int, nums []int) int {
-	n := len(nums)
-	minLength := math.MaxInt32 // Use a large number to represent the minimum length initially
-	currentSum := 0            // Sum of the current window
-	left := 0                  // Left pointer
+	minL := math.MaxInt32
+	sum := 0
+	left := 0
 
-	for right := 0; right < n; right++ {
-		currentSum += nums[right] // Expand the window by adding nums[right]
-
-		// Shrink the window as small as possible while the sum is >= target
-		for currentSum >= target {
-			// Update the minimum length if the current window is smaller
-			minLength = min(minLength, right-left+1)
-			currentSum -= nums[left] // Shrink the window by removing nums[left]
-			left++                   // Move the left pointer to the right
+	for right := 0; right < len(nums); right++ {
+		sum += nums[right]
+		for sum >= target {
+			minL = min(sum, right-left+1)
+			sum -= nums[left]
+			left++
 		}
 	}
-
-	// If minLength was never updated, return 0 (no valid subarray found)
-	if minLength == math.MaxInt32 {
-		return 0
+	if minL == math.MaxInt32 {
+		minL = 0
 	}
-	return minLength
+	return minL
 }
 
 // Helper function to find the minimum of two integers
