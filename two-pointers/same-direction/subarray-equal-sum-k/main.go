@@ -1,12 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	nums := []int{1, 1, 1, 2}
 	k := 2
 	// fmt.Println("count: ", bruteForce(nums, k))
-	fmt.Println("count: ", bruteForcePrefixSum(nums, k))
+	// fmt.Println("count: ", bruteForcePrefixSum(nums, k))
+	fmt.Println("count: ", PrefixSumHashMap(nums, k))
+}
+
+func PrefixSumHashMap(nums []int, k int) int {
+	count, sum := 0, 0
+	prf := make(map[int]int, len(nums))
+	for _, n := range nums {
+		sum += n
+		v, found := prf[sum-k]
+		if found {
+			count += v
+		}
+		prf[sum]++
+	}
+	return count
 }
 
 func bruteForce(nums []int, k int) int {
